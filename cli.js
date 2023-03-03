@@ -1,9 +1,10 @@
 #!/usr/bin/env node
 
-const meow = require('meow')
-const B2f = require('.')
+const meow = require('meow');
+const B2f = require('.');
 
-const cli = meow(`
+const cli = meow(
+  `
   Usage:
     b2f [baseDir] [options]
 
@@ -14,23 +15,25 @@ const cli = meow(`
     --output, -o    Specify the output path  ( default: ./out )
     --version       Output version number
     --help          Output usage information
-`, {
-  flags: {
-    output: {
-      type: 'string',
-      default: './out',
-      alias: 'o'
-    }
+`,
+  {
+    flags: {
+      output: {
+        type: 'string',
+        default: './out',
+        alias: 'o',
+      },
+    },
   }
-})
+);
 
 const config = {
   inputPath: cli.input[0] || null,
-  outputPath: cli.flags.output || null
-}
+  outputPath: cli.flags.output || null,
+};
 
 if (cli.flags.output === true) {
-  console.error(`Value for 'output' of type '[String]' required.`)
+  console.error(`Value for 'output' of type '[String]' required.`);
 } else {
-  new B2f(config).run()
+  new B2f(config).run();
 }
