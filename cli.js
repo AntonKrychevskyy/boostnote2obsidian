@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
-const meow = require('meow');
-const B2f = require('.');
+import meow from 'meow';
+import B2O from '.';
 
 const cli = meow(
   `
@@ -35,5 +35,5 @@ const config = {
 if (cli.flags.output === true) {
   console.error(`Value for 'output' of type '[String]' required.`);
 } else {
-  new B2f(config).run();
+  new B2O(config).run();
 }

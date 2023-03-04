@@ -5,6 +5,7 @@
   "repository": "AntonKrychevskyy/boostnote2obsidian",
   "license": "MIT",
   "main": "index.js",
+  "type": "module",
   "bin": {
     "b2f": "cli.js"
   },
