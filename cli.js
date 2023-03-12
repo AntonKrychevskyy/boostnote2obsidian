@@ -34,10 +34,22 @@ const cli = meow(
     --heading, -h           Include title heading in every note. In Obsidian treat file name as
                               title and automatically adds to the top of displayed note. 
                               'b2o -h'
-    --links, -l             Try to convert internal links (to other boostnotes) to Obsidian format.
-                              Latest version of BoostnoteNext.Local app does not support this
-                              feature and thus internal links are broken (do not match any note).
+    --wiki, -w              Convert links and images markdown format to wiki format. Use it if your
+                              Obsidian is set to use wiki mode.
+                              From '[link text](http://site.com)' to '[[http://site.com|link text]]',
+                              from ![alt text](images/avatar.png "mouse over text") to
+                              ![[images/avatar.png|alt=alt text|mouse over text]].
+    --links, -l             Try to find linked boostnote and calculate its new name and location
+                              based on current config options and update link.
+                              Latest version (0.23.0) of BoostnoteNext.Local does not support
+                              internal links so most probably left internal links are broken (do not
+                              match any note).
                               'b2o -l'
+    --attachments, -a       Name of the folder to store attachments. By default all attachments will
+                              be stored in the same folder as notes. Use this option to define
+                              subfolder name that will be created inside notes folder.
+                              'b2o -a assets' for notes from Math folder will put attachments in
+                              'Math/assets' folder.
 
     --version               Output version number
     --help                  Output usage information
@@ -66,10 +78,20 @@ const cli = meow(
         alias: 'h',
         default: false,
       },
+      wiki: {
+        type: 'boolean',
+        alias: 'w',
+        default: false,
+      },
       links: {
         type: 'boolean',
         alias: 'l',
         default: false,
+      },
+      attachments: {
+        type: 'string',
+        alias: 'a',
+        default: null,
       },
     },
   }
