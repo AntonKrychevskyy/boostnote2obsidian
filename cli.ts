@@ -2,7 +2,7 @@
 
 import path from 'path';
 import meow from 'meow';
-import B2O from '.';
+import B2O from './index.js';
 
 const cli = meow(
   `
@@ -21,12 +21,12 @@ const cli = meow(
                               directory and put there coverting results.
 
   Options:
-    --folder, -f            Specify the folder that need to be converted ( default: all folders ).
-                              Could be used multiple times.
+    --includeFolders, -f    Specify folder that need to be converted ( default: all folders ). Could
+                              be used multiple times.
                               'b2o -f Math -f "Business Ideas"' will convert notes only from 'Math'
                               and 'Business Ideas' folders.
-    --excludeFolder, -ef    Specify the folder to be excluded ( default: none ). Could be used
-                              multiple times.
+    --excludeFolders, -ef   Specify folders to be excluded ( default: none ). Could be used multiple
+                              times.
                               'b2o -ef Math -ef "Business Ideas"' will convert notes from all folders
                               except 'Math' and 'Business Ideas'.
     --tags, -t              Convert tags to hashtags at the top of each note separated by a space.
@@ -36,15 +36,12 @@ const cli = meow(
                               'b2o -h'
     --wiki, -w              Convert links and images markdown format to wiki format. Use it if your
                               Obsidian is set to use wiki mode.
-                              From '[link text](http://site.com)' to '[[http://site.com|link text]]',
-                              from ![alt text](images/avatar.png "mouse over text") to
-                              ![[images/avatar.png|alt=alt text|mouse over text]].
-    --links, -l             Try to find linked boostnote and calculate its new name and location
-                              based on current config options and update link.
-                              Latest version (0.23.0) of BoostnoteNext.Local does not support
-                              internal links so most probably left internal links are broken (do not
-                              match any note).
-                              'b2o -l'
+                              From [Relative Document](Some%20Category/Sub%20Category/Document)
+                              to [[Some Category/Sub Category/Document|Relative Document]],
+                              from ![alt text](images/avatar.png "mouse over text")
+                              to ![[images/avatar.png|alt text]].
+                              External links '[link text](http://site.com "click me")' do not has
+                              wiki format alternative, so they stay in markdown format.
     --attachments, -a       Name of the folder to store attachments. By default all attachments will
                               be stored in the same folder as notes. Use this option to define
                               subfolder name that will be created inside notes folder.
@@ -56,17 +53,18 @@ const cli = meow(
 `,
   {
     importMeta: import.meta,
-    imputs: ['source', 'output'],
     flags: {
-      folder: {
+      includeFolders: {
         type: 'string',
         alias: 'f',
         isMultiple: true,
+        default: [],
       },
-      excludeFolder: {
+      excludeFolders: {
         type: 'string',
         alias: 'ef',
         isMultiple: true,
+        default: [],
       },
       tags: {
         type: 'boolean',
@@ -83,15 +81,10 @@ const cli = meow(
         alias: 'w',
         default: false,
       },
-      links: {
-        type: 'boolean',
-        alias: 'l',
-        default: false,
-      },
       attachments: {
         type: 'string',
         alias: 'a',
-        default: null,
+        default: '',
       },
     },
   }

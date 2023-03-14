@@ -1,4 +1,5 @@
 node_modules
+bin
 bower_components
 logs
 *.log

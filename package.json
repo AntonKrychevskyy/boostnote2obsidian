@@ -4,7 +4,7 @@
   "version": "0.0.1",
   "repository": "AntonKrychevskyy/boostnote2obsidian",
   "license": "MIT",
-  "main": "index.js",
+  "main": "bin/index.js",
   "type": "module",
   "bin": {
     "b2o": "cli.js"
@@ -24,13 +24,23 @@
   },
   "scripts": {
     "test": "mocha",
-    "lint": "standard"
+    "lint": "standard",
+    "clean": "del ./bin/**/*",
+    "build": "tsc -p ./tsconfig.json",
+    "rebuild": "npm run clean && npm run build",
+    "debug": "nodemon --inspect ./cli.ts"
   },
   "devDependencies": {
+    "@tsconfig/node16-strictest-esm": "^1.0.3",
+    "@types/fs-extra": "^11.0.1",
     "coffee": "^5.4.0",
+    "del-cli": "^5.0.0",
     "mocha": "^10.2.0",
+    "nodemon": "^2.0.22",
     "prettier": "^2.8.4",
-    "standard": "^12.0.1"
+    "standard": "^12.0.1",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.0.2"
   },
   "dependencies": {
     "colors": "^1.4.0",
