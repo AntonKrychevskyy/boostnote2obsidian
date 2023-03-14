@@ -4,9 +4,7 @@ import fs from 'fs-extra';
 // import colors from 'colors/safe.js';
 import sanitizeFilename from 'sanitize-filename';
 
-const cwd = process.cwd();
-const DEFAULT_INPUT_PATH = './';
-const DEFAULT_OUTPUT_PATH = './out';
+import { TITLE_REGEX } from './constants';
 
 export default class Boostnote2Obsidian {
   constructor(config = {}) {
