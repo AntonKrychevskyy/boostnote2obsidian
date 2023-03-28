@@ -2,7 +2,7 @@
 
 import path from 'path';
 import meow from 'meow';
-import B2O from './index.js';
+import B2O from './boostnote2obsidian.js';
 
 const cli = meow(
   `

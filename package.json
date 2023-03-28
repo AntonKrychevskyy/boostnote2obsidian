@@ -7,11 +7,12 @@
   "main": "bin/index.js",
   "type": "module",
   "bin": {
-    "b2o": "cli.js"
+    "b2o": "bin/cli.js"
   },
   "files": [
-    "cli.js",
-    "index.js"
+    "bin/cli.js",
+    "bin/boostnote2obsidian.js",
+    "bin/constants.js"
   ],
   "keywords": [
     "convert",
@@ -28,7 +29,7 @@
     "clean": "del ./bin/**/*",
     "build": "tsc -p ./tsconfig.json",
     "rebuild": "npm run clean && npm run build",
-    "debug": "nodemon --inspect ./cli.ts"
+    "debug": "nodemon --inspect ./src/b2o.ts"
   },
   "devDependencies": {
     "@tsconfig/node16-strictest-esm": "^1.0.3",
