@@ -238,10 +238,8 @@ export default class Boostnote2Obsidian {
   private async makeOutputFolders(foldersList: string[]) {
     for await (const outputFullPath of foldersList) {
       try {
-        const longestPath = this.attachmentsFolder
-          ? path.join(outputFullPath, this.attachmentsFolder)
-          : outputFullPath;
-        await fs.ensureDir(longestPath);
+        const attachmentsFolderPath = path.join(outputFullPath, this.attachmentsFolder);
+        await fs.ensureDir(attachmentsFolderPath);
       } catch (error) {
         console.error(`Failed to create folder ${outputFullPath}`, error);
         this.errors.push(`Failed to create folder ${outputFullPath}`);

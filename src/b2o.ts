@@ -42,11 +42,13 @@ const cli = meow(
                               to ![[images/avatar.png|alt text]].
                               External links '[link text](http://site.com "click me")' do not has
                               wiki format alternative, so they stay in markdown format.
-    --attachments, -a       Name of the folder to store attachments. By default all attachments will
-                              be stored in the same folder as notes. Use this option to define
-                              subfolder name that will be created inside notes folder.
+    --attachments, -a       Name of subfolder in note's folder to store attachments. By default its
+                              name is 'attachments'. Use this option to define desired name for it.
+                              You can set empty string to store attachments directly in note's folder.
                               'b2o -a assets' for notes from Math folder will put attachments in
                               'Math/assets' folder.
+                              'b2o -a ""' for notes from Math folder will put attachments in
+                              'Math' folder.
 
     --version               Output version number
     --help                  Output usage information
@@ -84,7 +86,7 @@ const cli = meow(
       attachments: {
         type: 'string',
         alias: 'a',
-        default: '',
+        default: 'attachments',
       },
     },
   }
