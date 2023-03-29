@@ -110,8 +110,8 @@ export default class Boostnote2Obsidian {
     this.attachmentsFolder = config.attachments;
   }
 
-  // TODO: Use extension from reference, not label
   // TODO: Track attachment filenames and add mechanism to avoid duplicates by adding suffixes
+  // TODO: Add context to errors
 
   async run() {
     // 1. Parse boostnote.json
@@ -302,7 +302,9 @@ export default class Boostnote2Obsidian {
         continue;
       }
 
-      const newFilename = this.sanitizeTitle(label || attachmentReference).replaceAll(' ', '_');
+      const ext = path.extname(attachmentPath);
+      const referenceName = label.replace('/.+w+$/g', '') || attachmentReference.replace(ext, '');
+      const newFilename = this.sanitizeTitle(referenceName).replaceAll(' ', '_') + ext;
       const newFilePath = path.resolve(attachmentsFolder, newFilename);
 
       await fs.copyFile(attachmentPath, newFilePath);
