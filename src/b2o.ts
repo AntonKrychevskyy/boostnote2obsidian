@@ -21,18 +21,19 @@ const cli = meow(
                               directory and put there coverting results.
 
   Options:
-    --includeFolders, -f    Specify folder that need to be converted ( default: all folders ). Could
+    --includeFolder, -i     Specify folder that need to be converted ( default: all folders ). Could
                               be used multiple times.
-                              'b2o -f Math -f "Business Ideas"' will convert notes only from 'Math'
+                              'b2o -i Math -i "Business Ideas"' will convert notes only from 'Math'
                               and 'Business Ideas' folders.
-    --excludeFolders, -ef   Specify folders to be excluded ( default: none ). Could be used multiple
+    --excludeFolder, -e     Specify folders to be excluded ( default: none ). Could be used multiple
                               times.
-                              'b2o -ef Math -ef "Business Ideas"' will convert notes from all folders
+                              'b2o -e Math -e "Business Ideas"' will convert notes from all folders
                               except 'Math' and 'Business Ideas'.
     --tags, -t              Convert tags to hashtags at the top of each note separated by a space.
                               'b2o -t'
-    --heading, -h           Include title heading in every note. In Obsidian treat file name as
-                              title and automatically adds to the top of displayed note. 
+    --heading, -h           Include title heading in every note. Obsidian treat file name as
+                              title and automatically adds heading to the top of displayed note. So
+                              explicit heading is not needed. But if you want to have it, use this 
                               'b2o -h'
     --wiki, -w              Convert links and images markdown format to wiki format. Use it if your
                               Obsidian is set to use wiki mode.
@@ -56,15 +57,15 @@ const cli = meow(
   {
     importMeta: import.meta,
     flags: {
-      includeFolders: {
+      includeFolder: {
         type: 'string',
-        alias: 'f',
+        alias: 'i',
         isMultiple: true,
         default: [],
       },
-      excludeFolders: {
+      excludeFolder: {
         type: 'string',
-        alias: 'ef',
+        alias: 'e',
         isMultiple: true,
         default: [],
       },

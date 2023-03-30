@@ -9,8 +9,8 @@ import { REFERENCES_REGEX, TITLE_REGEX } from './constants.js';
 interface Config {
   source: string;
   output: string;
-  includeFolders: string[];
-  excludeFolders: string[];
+  includeFolder: string[];
+  excludeFolder: string[];
   tags: boolean;
   heading: boolean;
   wiki: boolean;
@@ -101,17 +101,17 @@ export default class Boostnote2Obsidian {
   constructor(config: Config) {
     this.sourcePath = path.resolve(config.source);
     this.outputPath = path.resolve(config.output);
-    this.isAll = !config.includeFolders.length && !config.excludeFolders.length;
-    this.includeFolders = config.includeFolders;
-    this.excludeFolders = config.excludeFolders;
+    this.isAll = !config.includeFolder.length && !config.excludeFolder.length;
+    this.includeFolders = config.includeFolder;
+    this.excludeFolders = config.excludeFolder;
     this.isTagsIncluded = config.tags;
     this.isTitleIncluded = config.heading;
     this.isWikiFormat = config.wiki;
     this.attachmentsFolder = config.attachments;
   }
 
-  // TODO: Track attachment filenames and add mechanism to avoid duplicates by adding suffixes
-  // TODO: Add context to errors
+  // TODO: Refactor variable names
+  // TODO: Refactor functions
 
   async run() {
     // 1. Parse boostnote.json
