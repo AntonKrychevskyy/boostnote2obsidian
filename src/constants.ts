@@ -79,7 +79,7 @@ const ALL_LANGS_CHARS_REGEX_RANGES = [
 ].join('');
 
 export const REFERENCES_REGEX = new RegExp(
-  `(!)?\\[([^[\\]]+)]\\((:note:)?([\\w-_:/.]+)( "([\\d${ALL_LANGS_CHARS_REGEX_RANGES}\\s-–.,:;]*)")?\\)`,
+  `(!)?\\[([^[\\]]+)?\\]\\((:note:)?([\\w-_:/.]+)( "([\\d${ALL_LANGS_CHARS_REGEX_RANGES}\\s-–.,:;]*)")?\\)`,
   'g'
 );
 export const TITLE_REGEX = new RegExp(
